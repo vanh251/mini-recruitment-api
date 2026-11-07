@@ -91,7 +91,7 @@ Quan hệ: `Company 1—N Job 1—N Application`. ID là bigint identity; tiền
 
 [Migration V1](src/main/resources/db/migration/V1__create_recruitment_tables.sql) tạo bảng, khóa ngoại, CHECK và unique `(job_id, email)`. Hibernate dùng `ddl-auto=validate`; không tự sửa schema. Không chạy lại SQL thủ công sau khi Flyway đã áp dụng; thay đổi tiếp theo cần migration V2.
 
-DTO tách khỏi entity, constructor injection, transaction ở service. Danh sách Job dùng Specification và entity graph Company để tránh N+1. Có index cho FK và `(status, location)`; unique index hỗ trợ tra email theo Job. Tìm chuỗi con không dấu phân biệt hoa thường dùng `lower(...) LIKE` với escape `%`, `_`, `\`; B-tree không tối ưu tìm chuỗi con tùy ý. Với dữ liệu lớn có thể bổ sung `pg_trgm`/GIN bằng migration mới.
+DTO tách khỏi entity, constructor injection, transaction ở service. Danh sách Job dùng Specification và entity graph Company để tránh N+1. Có index cho FK và `(status, location)`; unique index hỗ trợ tra email theo Job. Tìm chuỗi con không phân biệt hoa thường dùng `lower(...) LIKE` với escape `%`, `_`, `\`; B-tree không tối ưu tìm chuỗi con tùy ý. Với dữ liệu lớn có thể bổ sung `pg_trgm`/GIN bằng migration mới.
 
 Email được trim + lowercase trước validation/lưu. Một email được nộp cho nhiều Job nhưng chỉ một lần mỗi Job. Nộp hồ sơ, sửa và xóa Job cùng khóa ghi bản ghi Job trong transaction: request đến sau khi Job đóng sẽ bị từ chối. Unique constraint bảo vệ lần cuối. Không cascade xóa: Company còn Job và Job còn Application đều trả 409 để giữ lịch sử.
 
@@ -108,7 +108,7 @@ Email được trim + lowercase trước validation/lưu. Một email được n
 | POST | `/jobs/{id}/applications` | 201 + Location |
 | GET | `/jobs/{id}/applications/{applicationId}` | 200 |
 
-PUT thay toàn bộ thông tin, tất cả trường trong payload mẫu là bắt buộc. Website và CV phải là HTTP(S) URL; CV chỉ lưu link, không tải file về.
+PUT thay toàn bộ thông tin, tất cả trường trong payload mẫu là bắt buộc. Website và CV phải là HTTP(S) URL; CV chỉ lưu link, không tải file về. JSON có trường lạ, nhiều document nối tiếp, enum dạng số hoặc ID dạng thập phân bị từ chối bằng 400.
 
 `GET /jobs?keyword=java&location=Ha%20Noi&status=OPEN&page=0&size=20&sort=salaryFrom,desc`
 

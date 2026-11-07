@@ -50,6 +50,40 @@ class RecruitmentApiIT {
   }
 
   @Test
+  void trailingJsonDocumentsAreRejected() throws Exception {
+    mvc.perform(
+            post("/companies")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json.writeValueAsString(companyBody("Rikkei")) + " {}"))
+        .andExpect(status().isBadRequest())
+        .andExpect(jsonPath("$.code").value("INVALID_REQUEST"));
+    assertThat(jdbc.queryForObject("select count(*) from companies", Integer.class)).isZero();
+  }
+
+  static Stream<Arguments> invalidScalarTypes() {
+    return Stream.of(
+        Arguments.of("status", 0),
+        Arguments.of("status", 1),
+        Arguments.of("status", "0"),
+        Arguments.of("status", "1"),
+        Arguments.of("companyId", 1.9));
+  }
+
+  @ParameterizedTest
+  @MethodSource("invalidScalarTypes")
+  void invalidJobScalarTypesAreRejected(String field, Object value) throws Exception {
+    var payload = jobBody(company(), "Java", "API", "Ha Noi", "OPEN", 100);
+    payload.put(field, value);
+    mvc.perform(
+            post("/jobs")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json.writeValueAsString(payload)))
+        .andExpect(status().isBadRequest())
+        .andExpect(jsonPath("$.code").value("INVALID_REQUEST"));
+    assertThat(jdbc.queryForObject("select count(*) from jobs", Integer.class)).isZero();
+  }
+
+  @Test
   void protocolErrorsKeepTheirHttpStatusAndJsonShape() throws Exception {
     mvc.perform(patch("/companies/1").contentType(MediaType.APPLICATION_JSON).content("{}"))
         .andExpect(status().isMethodNotAllowed())
