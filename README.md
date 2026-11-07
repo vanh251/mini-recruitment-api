@@ -1,5 +1,7 @@
 # Mini API tuyển dụng
 
+[Repository công khai](https://github.com/vanh251/mini-recruitment-api) · [CI](https://github.com/vanh251/mini-recruitment-api/actions) · [Kết quả kiểm chứng](docs/verification.md)
+
 Bài thực hành **Java 17 + Spring Boot 3.5.16 + PostgreSQL**. API quản lý công ty, công việc và hồ sơ ứng tuyển; tìm kiếm có lọc/phân trang/sắp xếp; validation và lỗi JSON thống nhất. Không yêu cầu đăng nhập trong phạm vi bài.
 
 ## 1. Yêu cầu và chạy nhanh

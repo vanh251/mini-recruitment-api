@@ -28,39 +28,39 @@
 ### Task 1: Build and schema
 
 Files: `pom.xml`, Maven Wrapper, `compose.yaml`, `src/main/resources/application.yml`, `db/migration/V1__create_recruitment_tables.sql`.
-- [ ] Configure Maven/Java 17, dependency versions, formatting and CI.
-- [ ] Add database schema with FK, CHECK, unique and search indexes.
-- [ ] Verify wrapper and dependency resolution; commit scaffold.
+- [x] Configure Maven/Java 17, dependency versions, formatting and CI.
+- [x] Add database schema with FK, CHECK, unique and search indexes.
+- [x] Verify wrapper and dependency resolution; commit scaffold.
 
 ### Task 2: Company CRUD
 
 Files: `company/{Company,CompanyRequest,CompanyResponse,CompanyRepository,CompanyService,CompanyController}.java`; common paging/errors; `CompanyServiceTest.java`.
 Interface: create/update/get return CompanyResponse; list returns PageResponse; delete returns void. CompanyService.requireCompany(Long) returns Company for Job service.
-- [ ] Write service tests for create/get/update/delete/not-found and deletion conflict; observe RED.
-- [ ] Implement DTO validation, CRUD service/controller, response mapping and error advice.
-- [ ] Run service suite GREEN; commit Company feature.
+- [x] Write service tests for create/get/update/delete/not-found and deletion conflict; observe RED.
+- [x] Implement DTO validation, CRUD service/controller, response mapping and error advice.
+- [x] Run service suite GREEN; commit Company feature.
 
 ### Task 3: Job CRUD and search
 
 Files: `job/{Job,JobStatus,JobRequest,JobResponse,JobRepository,JobService,JobController,JobSpecifications}.java`; `JobServiceTest.java`.
 Interface: JobRepository.findLockedById(Long) locks for write; JobService.search returns PageResponse<JobResponse>; create/update/get return JobResponse.
-- [ ] Write tests for salary range, missing company/job, filters and safe sort; observe RED.
-- [ ] Implement CRUD, literal escaped case-insensitive search, paging and locking.
-- [ ] Run complete suite GREEN; commit Job feature.
+- [x] Write tests for salary range, missing company/job, filters and safe sort; observe RED.
+- [x] Implement CRUD, literal escaped case-insensitive search, paging and locking.
+- [x] Run complete suite GREEN; commit Job feature.
 
 ### Task 4: Applications
 
 Files: `application/{Application,ApplicationRequest,ApplicationResponse,ApplicationRepository,ApplicationService,ApplicationController}.java`; `ApplicationServiceTest.java`.
 Interface: submit(Long,ApplicationRequest) and get(Long,Long) return ApplicationResponse; inject Clock for deterministic server time.
-- [ ] Test OPEN success, CLOSED rejection, duplicate rejection, canonical email, server timestamp, missing job, constraint conflict; observe RED.
-- [ ] Implement transactional submit with locked job, normalized email and saveAndFlush.
-- [ ] Run complete suite GREEN; commit Application feature.
+- [x] Test OPEN success, CLOSED rejection, duplicate rejection, canonical email, server timestamp, missing job, constraint conflict; observe RED.
+- [x] Implement transactional submit with locked job, normalized email and saveAndFlush.
+- [x] Run complete suite GREEN; commit Application feature.
 
 ### Task 5: HTTP/database verification and delivery
 
 Files: `RecruitmentApiIntegrationTest.java`, `README.md`, `requests.http`, `.github/workflows/ci.yml`.
-- [ ] Write full-stack HTTP tests for validation/status/errors/search and PostgreSQL constraints/races.
-- [ ] Run migration/integration tests against PostgreSQL and Java 17; fix evidenced failures.
-- [ ] Document commands, endpoint payloads, schema and tradeoffs; run formatter and clean verify.
-- [ ] Obtain whole-project independent review, fix material findings, verify again and commit.
-- [ ] Publish a new public repository if authenticated creation is available; otherwise report exact outstanding step without claiming publication.
+- [x] Write full-stack HTTP tests for validation/status/errors/search and PostgreSQL constraints/races.
+- [x] Run migration/integration tests against PostgreSQL and Java 17; fix evidenced failures.
+- [x] Document commands, endpoint payloads, schema and tradeoffs; run formatter and clean verify.
+- [x] Obtain whole-project independent review, fix material findings, verify again and commit.
+- [x] Publish a new public repository if authenticated creation is available; otherwise report exact outstanding step without claiming publication.
