@@ -1,6 +1,6 @@
 # Thiết kế Mini API tuyển dụng
 
-Trạng thái: đề xuất để duyệt; chưa triển khai mã ứng dụng.
+Trạng thái: người dùng đã duyệt và yêu cầu “triển khai luôn”.
 
 ## Mục tiêu và phạm vi
 
@@ -11,7 +11,7 @@ Hoàn thành bài thực hành Java 17, Spring Boot 3, PostgreSQL: CRUD Company/
 1. **Đề xuất: PostgreSQL + Spring Data JPA + Flyway.** Một schema migration dùng nhất quán khi chạy và kiểm thử tích hợp; khóa ngoại và unique constraint bảo vệ dữ liệu. Docker Compose hỗ trợ khởi tạo database.
 2. **MySQL + Spring Data JPA + Flyway.** Cũng đáp ứng đề, phù hợp nếu người học đã có MySQL; cần đổi driver, migration và cấu hình kiểm thử.
 
-PostgreSQL là lựa chọn do người triển khai đề xuất, chưa phải lựa chọn đã được người dùng xác nhận.
+PostgreSQL là lựa chọn đã được duyệt qua yêu cầu triển khai bản thiết kế này.
 
 ## Kiến trúc và công cụ
 

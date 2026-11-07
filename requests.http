@@ -1,0 +1,55 @@
+@baseUrl = http://localhost:8080
+@companyId = 1
+@jobId = 1
+@applicationId = 1
+
+### Create company; use returned id below
+POST {{baseUrl}}/companies
+Content-Type: application/json
+
+{"name":"Rikkei","address":"Ha Noi","website":"https://rikkei.vn"}
+
+### Read company
+GET {{baseUrl}}/companies/{{companyId}}
+
+### List companies
+GET {{baseUrl}}/companies?page=0&size=20&sort=name,asc
+
+### Update company
+PUT {{baseUrl}}/companies/{{companyId}}
+Content-Type: application/json
+
+{"name":"Rikkei Academy","address":"Ha Noi","website":"https://rikkei.vn"}
+
+### Create job; use returned id below
+POST {{baseUrl}}/jobs
+Content-Type: application/json
+
+{"companyId":{{companyId}},"title":"Java Developer","description":"Spring Boot REST API","salaryFrom":15000000,"salaryTo":25000000,"location":"Ha Noi","status":"OPEN"}
+
+### Search jobs
+GET {{baseUrl}}/jobs?keyword=java&location=Ha%20Noi&status=OPEN&page=0&size=10&sort=salaryFrom,desc
+
+### Read job
+GET {{baseUrl}}/jobs/{{jobId}}
+
+### Apply; repeating request returns 409
+POST {{baseUrl}}/jobs/{{jobId}}/applications
+Content-Type: application/json
+
+{"fullName":"Nguyen Van A","email":"a@example.com","cvUrl":"https://example.com/cv.pdf"}
+
+### Read application
+GET {{baseUrl}}/jobs/{{jobId}}/applications/{{applicationId}}
+
+### Close job; subsequent applications return 409
+PUT {{baseUrl}}/jobs/{{jobId}}
+Content-Type: application/json
+
+{"companyId":{{companyId}},"title":"Java Developer","description":"Spring Boot REST API","salaryFrom":15000000,"salaryTo":25000000,"location":"Ha Noi","status":"CLOSED"}
+
+### Delete job (409 if applications exist)
+DELETE {{baseUrl}}/jobs/{{jobId}}
+
+### Delete company (409 if jobs exist)
+DELETE {{baseUrl}}/companies/{{companyId}}
