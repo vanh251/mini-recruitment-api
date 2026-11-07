@@ -1,0 +1,11 @@
+/target/
+/.tools/
+/.superpowers/
+/.docker-local/
+/.idea/
+/.vscode/
+*.iml
+*.log
+.env
+.env.*
+!.env.example
