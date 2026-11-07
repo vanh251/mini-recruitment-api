@@ -32,6 +32,11 @@
         <configuration><java><googleJavaFormat><version>1.24.0</version></googleJavaFormat></java></configuration>
         <executions><execution><goals><goal>check</goal></goals><phase>verify</phase></execution></executions>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-checkstyle-plugin</artifactId><version>3.6.0</version>
+        <configuration><configLocation>checkstyle.xml</configLocation><includeTestSourceDirectory>true</includeTestSourceDirectory><consoleOutput>true</consoleOutput><failOnViolation>true</failOnViolation></configuration>
+        <executions><execution><phase>verify</phase><goals><goal>check</goal></goals></execution></executions>
+      </plugin>
     </plugins>
   </build>
   <profiles>

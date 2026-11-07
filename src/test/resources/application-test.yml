@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: ${TEST_DB_URL:jdbc:postgresql://localhost:5432/recruitment_test}
+    username: ${TEST_DB_USERNAME:recruitment}
+    password: ${TEST_DB_PASSWORD:recruitment_dev}
+  jpa:
+    properties:
+      hibernate.jdbc.time_zone: UTC
+logging:
+  level:
+    org.hibernate.engine.jdbc.spi.SqlExceptionHelper: OFF

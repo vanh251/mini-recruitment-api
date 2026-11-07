@@ -8,7 +8,7 @@ public final class Paging {
   private Paging() {}
 
   public static PageRequest of(int page, int size, String sort, Set<String> fields) {
-    if (page < 0 || size < 1 || size > 100) {
+    if (page < 0 || size < 1 || size > 100 || (long) page * size > Integer.MAX_VALUE) {
       throw ApiException.badRequest("page must be >= 0 and size must be between 1 and 100");
     }
     String[] parts = sort.split(",", -1);
